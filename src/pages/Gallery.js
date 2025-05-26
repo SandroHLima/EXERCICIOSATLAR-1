@@ -1,23 +1,55 @@
-import React, { useEffect, useState } from "react";
-const imageUrl = "https://i.imgur.com/fHyEMsl.jpg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { PhotoCard } from "../components/StyledComponents";
+import PhotoCardComponent from "../components/PhotoCard";
 
-export default function App() {
-  const [img, setImg] = useState();
+function Gallery({ userPhotos, setUserPhotos }) {
+  const [apiPhotos, setApiPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const fetchImage = async () => {
-    const res = await fetch(imageUrl);
-    const imageBlob = await res.blob();
-    const imageObjectURL = URL.createObjectURL(imageBlob);
-    setImg(imageObjectURL);
-  };
-
+  // Fetch photos from JSONPlaceholder API
   useEffect(() => {
-    fetchImage();
+    axios
+      .get("https://jsonplaceholder.typicode.com/photos?_limit=10")
+      .then((response) => {
+        setApiPhotos(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching photos:", error);
+        setLoading(false);
+      });
   }, []);
 
+  // Combine API photos and user-uploaded photos
+  const allPhotos = [...apiPhotos, ...userPhotos];
+
   return (
-    <>
-      <img src={img} alt="icons" />
-    </>
+    <div>
+      <h2>Gallery</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+            gap: "10px",
+          }}
+        >
+          {allPhotos.map((photo) => (
+            <PhotoCard key={photo.id}>
+              <PhotoCardComponent
+                photo={photo}
+                setUserPhotos={setUserPhotos}
+                isUserPhoto={userPhotos.some((p) => p.id === photo.id)}
+              />
+            </PhotoCard>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
+
+export default Gallery;
