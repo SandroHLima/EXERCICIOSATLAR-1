@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./StyledComponents";
 
 function PhotoCard({ photo, setUserPhotos, isUserPhoto }) {
+  const [imageError, setImageError] = useState(false);
+
   const handleDelete = () => {
     if (isUserPhoto) {
       setUserPhotos((prev) => prev.filter((p) => p.id !== photo.id));
     }
   };
 
+  const fallbackImage = "https://via.placeholder.com/150?text=Fallback+Image";
+
   return (
     <div>
       <img
-        src={photo.url}
+        src={imageError ? fallbackImage : photo.url}
         alt={photo.title}
         style={{
           width: "100%",
@@ -19,6 +23,7 @@ function PhotoCard({ photo, setUserPhotos, isUserPhoto }) {
           objectFit: "cover",
           borderRadius: "5px",
         }}
+        onError={() => setImageError(true)}
       />
       <p>{photo.title}</p>
       {isUserPhoto && (
