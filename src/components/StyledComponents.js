@@ -6,6 +6,9 @@ export const Container = styled.div`
   padding: 20px;
   text-align: center;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Input = styled.input`
@@ -45,6 +48,8 @@ export const TaskList = styled.ul`
   list-style: none;
   padding: 0;
   margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
 `;
 
 export const Task = styled.li`
@@ -58,4 +63,59 @@ export const Task = styled.li`
   border-radius: 4px;
   text-decoration: ${props => props.completed ? 'line-through' : 'none'};
   cursor: pointer;
+`;
+
+// Widget-specific styles
+export const WidgetContainer = styled.div`
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+`;
+
+export const WeatherCard = styled.div`
+padding-top:18px;
+  h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+  }
+`;
+
+export const Loading = styled.div`
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
+`;
+
+// New styles for widget search bar
+export const WidgetInput = styled.input`
+  padding: 6px;
+  margin-right: 5px;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+`;
+
+export const WidgetButton = styled.button`
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  &:hover {
+    background: #0056b3;
+  }
 `;

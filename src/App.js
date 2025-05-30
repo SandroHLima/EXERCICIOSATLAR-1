@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import TaskItem from './components/TaskItem';
+import WeatherWidget from './WeatherWidget';
 import { Container, Input, Button, TaskList, FilterButton } from './components/StyledComponents';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [filter, setFilter] = useState('all'); // 'all', 'completed', 'pending'
+  const apiKey = '9297720310e64d37fa054b802c765225'; // Hardcoded for demo; use .env in production
 
   const addTask = (e) => {
     e.preventDefault();
@@ -62,6 +64,7 @@ function App() {
           ))
         )}
       </TaskList>
+      <WeatherWidget apiKey={apiKey} />
     </Container>
   );
 }
