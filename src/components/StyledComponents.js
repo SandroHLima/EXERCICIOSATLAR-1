@@ -54,18 +54,32 @@ export const Button = styled.button`
   }
 `;
 
+export const WidgetContainer = styled.div`
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+`;
+
 export const WeatherCard = styled.div`
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  @media (max-width: 600px) {
-    padding: 10px;
+  h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
   }
 `;
 
 export const Loading = styled.div`
   font-style: italic;
   color: #666;
+  font-size: 14px;
 `;
